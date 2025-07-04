@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: MCP Context Viewer
-Plugin URI: https://www.mcp-hunt.com/
+Plugin URI: https://github.com/dekdee/mcp-context-viewer
 Description: Validate and view MCP (Model Context Protocol) JSON metadata in your WordPress admin.
 Version: 1.0.0
 Author: MCP Hunt
@@ -26,11 +26,12 @@ function mcp_context_viewer_page() {
         <h1>MCP Context Viewer</h1>
         <p>Paste your MCP JSON below to validate and view it formatted.</p>
         <form method="post">
+            <?php wp_nonce_field('mcp_validate', 'mcp_nonce'); ?>
             <textarea name="mcp_json" rows="10" cols="80"><?php echo esc_textarea($_POST['mcp_json'] ?? ''); ?></textarea><br>
             <p><input type="submit" class="button button-primary" value="Validate & View"></p>
         </form>
     <?php
-    if (!empty($_POST['mcp_json'])) {
+    if (!empty($_POST['mcp_json']) && isset($_POST['mcp_nonce']) && wp_verify_nonce($_POST['mcp_nonce'], 'mcp_validate')) {
         echo '<h2>Result:</h2>';
         $json = json_decode(stripslashes($_POST['mcp_json']), true);
         if (!$json) {
