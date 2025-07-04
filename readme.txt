@@ -1,8 +1,8 @@
 === MCP Context Viewer ===
 Contributors: mcp-hunt
-Tags: mcp, json, metadata, ai
+Tags: mcp, json, metadata, ai, validator
 Requires at least: 5.0
-Tested up to: 6.5
+Tested up to: 6.8
 Stable tag: 1.0.0
 License: MIT
 License URI: https://opensource.org/licenses/MIT
